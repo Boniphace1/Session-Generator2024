@@ -8,13 +8,13 @@ const fs = require('fs');
 let router = express.Router()
 const pino = require("pino");
 const {
-	default: Maher_Zubair,
+	default: Boniphace_Tech,
 	useMultiFileAuthState,
 	jidNormalizedUser,
 	Browsers,
 	delay,
 	makeInMemoryStore,
-} = require("maher-zubair-baileys");
+} = require("boniphace-tech-baileys");
 
 function removeFile(FilePath) {
 	if (!fs.existsSync(FilePath)) return false;
@@ -28,13 +28,13 @@ const {
 } = require("node:fs/promises")
 router.get('/', async (req, res) => {
 	const id = makeid();
-	async function SIGMA_MD_QR_CODE() {
+	async function BONIPHACE_MD_QR_CODE() {
 		const {
 			state,
 			saveCreds
 		} = await useMultiFileAuthState('./temp/' + id)
 		try {
-			let Qr_Code_By_Maher_Zubair = Maher_Zubair({
+			let Qr_Code_By_Boniphace_Tech = Boniphace_Tech({
 				auth: state,
 				printQRInTerminal: false,
 				logger: pino({
@@ -43,8 +43,8 @@ router.get('/', async (req, res) => {
 				browser: Browsers.macOS("Desktop"),
 			});
 
-			Qr_Code_By_Maher_Zubair.ev.on('creds.update', saveCreds)
-			Qr_Code_By_Maher_Zubair.ev.on("connection.update", async (s) => {
+			Qr_Code_By_Boniphace_Tech.ev.on('creds.update', saveCreds)
+			Qr_Code_By_Boniphace_Tech.ev.on("connection.update", async (s) => {
 				const {
 					connection,
 					lastDisconnect,
@@ -56,23 +56,23 @@ router.get('/', async (req, res) => {
 					let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
 					await delay(800);
 				   let b64data = Buffer.from(data).toString('base64');
-				   let session = await Qr_Code_By_Maher_Zubair.sendMessage(Qr_Code_By_Maher_Zubair.user.id, { text: 'SIGMA-MD;;;' + b64data });
+				   let session = await Qr_Code_By_Boniphace_Tech.sendMessage(Qr_Code_By_Boniphace_Tech.user.id, { text: 'BONIPHACE-MD;;;' + b64data });
 	
-				   let SIGMA_MD_TEXT = `
-*_Qr Code By Maher Zubair_*
+				   let BONIPHACE_MD_TEXT = `
+*_Qr Code By Boniphace Tech_*
 *_Made With 🤍_*
 	
 _Don't Forget To Give Star To My Repo_`
-	 await Qr_Code_By_Maher_Zubair.sendMessage(Qr_Code_By_Maher_Zubair.user.id,{text:SIGMA_MD_TEXT},{quoted:session})
+	 await Qr_Code_By_Boniphace_Tech.sendMessage(Qr_Code_By_Boniphace_Tech.user.id,{text:BONIPHACE_MD_TEXT},{quoted:session})
 
 
 
 					await delay(100);
-					await Qr_Code_By_Maher_Zubair.ws.close();
+					await Qr_Code_By_Boniphace_Tech.ws.close();
 					return await removeFile("temp/" + id);
 				} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
 					await delay(10000);
-					SIGMA_MD_QR_CODE();
+					BONIPHACE_MD_QR_CODE();
 				}
 			});
 		} catch (err) {
@@ -85,6 +85,6 @@ _Don't Forget To Give Star To My Repo_`
 			await removeFile("temp/" + id);
 		}
 	}
-	return await SIGMA_MD_QR_CODE()
+	return await BONIPHACE_MD_QR_CODE()
 });
 module.exports = router
